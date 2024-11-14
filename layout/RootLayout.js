@@ -1,13 +1,15 @@
+import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import { Container } from "./Container/Container.styles";
-import { NavigationContainer } from "@react-navigation/native";
- 
 function RootLayout({ children }) {
   return (
-    <Container>
-      {children}
-      <Menu />
-    </Container>
+    <>
+      <Container>
+        {children}
+        <Header title="volunTicket" />
+        <Menu />
+      </Container>
+    </>
   );
 }
 
