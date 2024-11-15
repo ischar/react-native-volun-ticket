@@ -6,7 +6,7 @@ function RootLayout({ children }) {
     <>
       <Container>
         {children}
-        <Header title="volunTicket" />
+        <Header title="volunTicket" isMain={true} />
         <Menu />
       </Container>
     </>
