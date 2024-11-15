@@ -3,7 +3,7 @@ import { lightTheme } from "../../theme/theme";
 
 export const TileContainer = styled.View`
   border-radius: 20px;
-  background-color: ${lightTheme.card};
+  background-color: ${(props) => (props.isColor ? lightTheme.colorCard : lightTheme.card)};
   width: 100%;
   height: 100%;
 `;

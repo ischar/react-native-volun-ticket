@@ -20,7 +20,7 @@ function HomeScreen() {
           </Tile>
         </Banner>
         <Section>
-          <Tile>
+          <Tile isColor={true}>
             <TileHeader>
               <TileTitleText>봉사하기</TileTitleText>
               <Image source={ICONS.get(ICON_NAMES.RIGHT)} />
