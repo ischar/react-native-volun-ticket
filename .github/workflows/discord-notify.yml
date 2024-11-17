@@ -56,7 +56,7 @@ jobs:
                           },
                           {
                             "name": "커밋 링크",
-                            "value": "[링크]('"$GITHUB_COMMIT_URL"')",
+                            "value": "[변경 사항]('"$GITHUB_COMMIT_URL"')",
                             "inline": false
                           }
                         ],
