@@ -1,0 +1,62 @@
+name: Notify Discord on Push # 워크플로우 이름
+on:
+  push:
+    branches:
+      - main # 브랜치에 푸시가 발생할 때 트리거 
+  workflow_dispatch: # 수동 워크플로우 실행 옵션
+jobs:
+  discord_notification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up environment variables # 환경 변수 설정 
+        run: |
+          # 현재 브랜치 이름
+          echo "GITHUB_REF_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          # 푸시된 커밋 메시지
+          echo "GITHUB_COMMIT_MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
+          # 커밋 작성자 이름
+          echo "GITHUB_ACTOR=${GITHUB_ACTOR}" >> $GITHUB_ENV
+
+      - name: Send notification to Discord # Discord Notify
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          # Discord Webhook API를 활용한 메시지 전송
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{
+                    "username": "GitHub Bot",
+                    "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                    "embeds": [
+                      {
+                        "title": "푸시 알림",
+                        "color": 3381759,
+                        "thumbnail": {
+                          "url": "https://i.postimg.cc/SNQjYtv8/vt-logo.png" 
+                        }, 
+                        "fields": [
+                          {
+                            "name": "브랜치",
+                            "value": "'"$GITHUB_REF_NAME"'",
+                            "inline": true
+                          },
+                          {
+                            "name": "커밋 작성자",
+                            "value": "'"$GITHUB_ACTOR"'",
+                            "inline": true
+                          },
+                          {
+                            "name": "커밋 메시지",
+                            "value": "'"$GITHUB_COMMIT_MESSAGE"'",
+                            "inline": false
+                          }
+                        ],
+                        "footer": {
+                          "text": "GitHub Actions - 자동 알림"
+                        },
+                        "timestamp": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'"
+                      }
+                    ]
+                  }' \
+               $DISCORD_WEBHOOK_URL
