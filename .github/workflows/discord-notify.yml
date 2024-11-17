@@ -17,6 +17,9 @@ jobs:
           echo "GITHUB_COMMIT_MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
           # 커밋 작성자 이름
           echo "GITHUB_ACTOR=${GITHUB_ACTOR}" >> $GITHUB_ENV
+          # 커밋 링크
+          echo "GITHUB_COMMIT_URL=${{ github.event.head_commit.url }}" >> $GITHUB_ENV
+
 
       - name: Send notification to Discord # Discord Notify
         env:
@@ -49,6 +52,11 @@ jobs:
                           {
                             "name": "커밋 메시지",
                             "value": "'"$GITHUB_COMMIT_MESSAGE"'",
+                            "inline": false
+                          },
+                          {
+                            "name": "커밋 링크",
+                            "value": "[링크]('"$GITHUB_COMMIT_URL"')",
                             "inline": false
                           }
                         ],
