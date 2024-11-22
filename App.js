@@ -1,11 +1,14 @@
+import React from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import RootLayout from "./layout/RootLayout";
 import MainNavigator from "./navigation/MainNavigator";
-import { lightTheme } from "./theme/theme";
+import { lightTheme, darkTheme } from "./theme/theme";
 
 export default function App() {
+  
+
   return (
     <ThemeProvider theme={lightTheme}>
       <StatusBar style="auto" />

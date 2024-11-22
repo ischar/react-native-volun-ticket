@@ -7,6 +7,7 @@ import VolunteerIcon from "../assets/icons/volunteer.svg";
 const SearchIcon = require("../assets/icons/search.png");
 const BackIcon = require("../assets/icons/back.png");
 const RightIcon = require("../assets/icons/right.png");
+const LogoIcon = require("../assets/icon.png");
 
 export const ICONS = new Map([
   ["HOME", HomeIcon],
@@ -17,6 +18,7 @@ export const ICONS = new Map([
   ["BACK", BackIcon],
   ["SEARCH", SearchIcon],
   ["RIGHT", RightIcon],
+  ["Logo", LogoIcon],
 ]);
 
 export const ICON_NAMES = {
@@ -28,4 +30,5 @@ export const ICON_NAMES = {
   SEARCH: "SEARCH",
   BACK: "BACK",
   RIGHT: "RIGHT",
+  Logo: "Logo",
 };
