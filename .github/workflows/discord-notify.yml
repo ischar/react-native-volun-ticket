@@ -1,27 +1,26 @@
-name: Notify Discord on Push # 워크플로우 이름
+name: Notify Discord on Push 
 on:
   push:
     branches:
-      - main # 브랜치에 푸시가 발생할 때 트리거 
-  workflow_dispatch: # 수동 워크플로우 실행 옵션
+      - main 
+  workflow_dispatch: 
 jobs:
   discord_notification:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up environment variables # 환경 변수 설정 
+      - name: Set up environment variables 
         run: |
           # 현재 브랜치 이름
           echo "GITHUB_REF_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          # 푸시된 커밋 메시지
-          echo "GITHUB_COMMIT_MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
+          # 푸시된 커밋 메시지 (줄바꿈 및 특수문자 이스케이프)
+          echo "GITHUB_COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | jq -Rsa .)" >> $GITHUB_ENV
           # 커밋 작성자 이름
           echo "GITHUB_ACTOR=${GITHUB_ACTOR}" >> $GITHUB_ENV
           # 커밋 링크
           echo "GITHUB_COMMIT_URL=${{ github.event.head_commit.url }}" >> $GITHUB_ENV
 
-
-      - name: Send notification to Discord # Discord Notify
+      - name: Send notification to Discord 
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -51,7 +50,7 @@ jobs:
                           },
                           {
                             "name": "커밋 메시지",
-                            "value": "'"$GITHUB_COMMIT_MESSAGE"'",
+                            "value": '"$GITHUB_COMMIT_MESSAGE"',
                             "inline": false
                           },
                           {
