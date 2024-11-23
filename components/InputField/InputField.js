@@ -1,7 +1,7 @@
 import { Input } from "./InputField.style";
 
-function InputField({ placeholder }) {
-  return <Input placeholder={placeholder} />;
+function InputField({ placeholder, onChangeText }) {
+  return <Input placeholder={placeholder} onChangeText={onChangeText} />;
 }
 
 export default InputField;

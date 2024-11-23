@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginButtonContainer = styled.View`
+export const CustomButtonContainer = styled.View`
   padding-horizontal: 33%;
   padding-vertical: 12px;
   margin-vertical: 8px;
@@ -8,7 +8,7 @@ export const LoginButtonContainer = styled.View`
   background-color: ${({ theme }) => theme.colorCard};
 `;
 
-export const LoginText = styled.Text`
+export const ButtonText = styled.Text`
   font-size: 16px;
   color: ${({theme}) => theme.primaryText};
   font-weight: 600;
