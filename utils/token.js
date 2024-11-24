@@ -7,3 +7,7 @@ export const saveToken = async (key, value) => {
     console.log(error);
   }
 };
+
+export const getToken = async () => {
+  return await SecureStore.getItemAsync("accessToken");
+};
